@@ -1,0 +1,9 @@
+{
+  "name": "ething-bot-system",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "baileyz": "npm:baileyz",
+    "firebase": "^10.12.0"
+  }
+}
