@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Settings</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="main">
+
+<h1>⚙️ Settings</h1>
+
+<div class="glass">
+  <h3>Welcome Message</h3>
+
+  <textarea id="welcome"></textarea>
+  <button class="btn" onclick="save()">Save</button>
+</div>
+
+</div>
+
+<script type="module">
+import { db, ref, set } from "./js/firebase.js";
+
+window.save = function () {
+  set(ref(db, "settings/welcome"),
+    document.getElementById("welcome").value
+  );
+
+  alert("Saved!");
+};
+</script>
+
+</body>
+</html>
