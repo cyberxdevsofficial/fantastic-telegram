@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="main">
+  <h1>🛒 Products</h1>
+
+  <div class="glass">
+    <input id="name" placeholder="Product Name">
+    <input id="price" placeholder="Price">
+    <button class="btn" onclick="add()">Add</button>
+  </div>
+</div>
+
+<script type="module">
+import { db, ref, set } from "./js/firebase.js";
+
+window.add = function () {
+  const name = document.getElementById("name").value.toLowerCase();
+  const price = document.getElementById("price").value;
+
+  set(ref(db, "products/" + name), { price });
+
+  alert("Added!");
+};
+</script>
+
+</body>
+</html>
