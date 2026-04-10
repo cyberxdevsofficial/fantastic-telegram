@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="main">
+  <h1>📦 Orders</h1>
+  <div id="orders"></div>
+</div>
+
+<script type="module">
+import { db, ref, onValue, update } from "./js/firebase.js";
+
+const container = document.getElementById("orders");
+
+onValue(ref(db, "orders"), snap => {
+  container.innerHTML = "";
+
+  snap.forEach(o => {
+    const data = o.val();
+
+    const div = document.createElement("div");
+    div.className = "glass";
+
+    div.innerHTML = `
+      <p>${data.name}</p>
+      <p>${data.status}</p>
+
+      <select onchange="updateStatus('${o.key}', this.value)">
+        <option>Pending</option>
+        <option>Shipped</option>
+        <option>Delivered</option>
+      </select>
+    `;
+
+    container.appendChild(div);
+  });
+});
+
+window.updateStatus = function(id, status) {
+  update(ref(db, "orders/" + id), { status });
+};
+</script>
+
+</body>
+</html>
